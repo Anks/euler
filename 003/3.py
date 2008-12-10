@@ -40,9 +40,18 @@ def get_primes():
             yield num
 
         num = num + 2
+        
+def prime_factors(number):
+    " Return a generator with all the prime factors of the input number "
+    primes = get_primes()
+    current_prime = primes.next()
 
-primes = get_primes()
-prime = None
-for i in range(10001):
-    prime = primes.next()
-print prime
+    while current_prime < math.sqrt(number):
+        if number % current_prime == 0:
+            yield current_prime
+            
+        current_prime = primes.next()
+
+    raise StopIteration
+
+print max(prime_factors(600851475143))
