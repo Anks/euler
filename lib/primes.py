@@ -8,9 +8,13 @@ I’m generating an infinite series of prime numbers using
 a method I remember from the SICP lectures. Fun.
 """
 
+
+_primes = [2, 3, 5] # Holds all prime numbers found so far
+
 def get_primes():
     "Returns a generator that keeps outputting prime numbers"
-
+    global _primes
+    
     def is_prime(num, _primes):
         "Check if a number is prime, use the primes found so far "
         for prime in _primes:
@@ -18,14 +22,11 @@ def get_primes():
                 return False
             if prime > math.sqrt(num):
                 return True
-    
-    _primes = [2, 3, 5] # Holds all prime numbers found so far
 
-    yield _primes[0]
-    yield _primes[1]
-    yield _primes[2]
+    for prime in _primes:
+        yield prime
 
-    num = _primes[2] + 2
+    num = _primes[-1] + 2
 
     while True:
         
